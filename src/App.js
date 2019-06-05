@@ -12,6 +12,7 @@ class App extends Component {
     this.busquedaMovie("")
   }
 
+
   busquedaMovie(searchTerm) {
     console.log("Sacando las pelis por pantalla")
     const urlString = "https://api.themoviedb.org/3/search/movie?api_key=1b5adf76a72a13bad99b8fc0c68cb085&query=" + searchTerm
@@ -25,11 +26,11 @@ class App extends Component {
 
         resultados.forEach((movie) => {
           movie.poster_src = "https://image.tmdb.org/t/p/w185" + movie.poster_path
-          const movieRow = <MovieRow key={movie.id} movie={movie}/>
+          const movieRow = <MovieRow key={movie.id} movie={movie} />
           movieRows.push(movieRow)
         })
 
-        this.setState({rows: movieRows})
+        this.setState({ rows: movieRows })
       },
       error: (xhr, status, err) => {
         console.error("Error al sacar los datos")
@@ -47,35 +48,41 @@ class App extends Component {
   render() {
     return (
       <div>
-        
+
         <table className="titleBar">
           <tbody>
             <tr>
               <td>
                 <img alt="app icon" width="50" src="green_app_icon.svg"/>
               </td>
-              <td width="8"/>
+              <td width="8" />
               <td>
                 <h1>TODOPelis</h1>
               </td>
+              <td style={{ paddingLeft: 1100 }} >
+                <button>Login</button>
+
+              </td>
+              <td>
+                <button>Register</button>
+              </td>
+              <td style={{ paddingLeft: 100 }} >
+                <input type="text" placeholder="Busca una pelicula" onChange={this.alEscribr.bind(this)}></input>
+              </td>
             </tr>
+
           </tbody>
         </table>
+        
+                {this.state.rows}
 
-        <input style={{
-          fontSize: 24,
-          display: 'block',
-          width: "99%",
-          paddingTop: 8,
-          paddingBottom: 8,
-          paddingLeft: 16
-        }} onChange={this.alEscribr.bind(this)} placeholder="Busca una pelicula"/>
+              </div>
+              
+            
+            
 
-        {this.state.rows}
-
-      </div>
-    );
-  }
-}
-
-export default App;
+              );
+            }
+          }
+          
+          export default App;
